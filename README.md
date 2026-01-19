@@ -2,6 +2,7 @@ Projektname: DSGVO-konformer KI-CRM-Automatisierungsagent ​(DSGVO-Compliant AI
 
 
 ​📝 Projektübersicht (Project Overview)
+
 ​Dieses Projekt ist ein autonomer KI-Agent, der speziell für deutsche kleine und mittlere Unternehmen (KMU) entwickelt wurde. Er nutzt Neural Networks (MLP), um Kundenanfragen in Echtzeit zu klassifizieren und das HubSpot CRM automatisch zu aktualisieren – und das alles ohne Drittanbieter-Tools wie Zapier oder n8n.
 ​
 
