@@ -1,0 +1,19 @@
+{
+  "intents": [
+    {
+      "tag": "rechnung",
+      "patterns": ["Wo ist meine Rechnung?", "Bezahlung problem", "Rechnung erhalten", "Zahlungsstatus"],
+      "responses": "Kategorie: Billing - Der Kunde fragt nach der Rechnung."
+    },
+    {
+      "tag": "support",
+      "patterns": ["Hilfe bitte", "Das System funktioniert nicht", "Technischer Fehler", "Support anfrage"],
+      "responses": "Kategorie: Technical Support - Kunde braucht technische Hilfe."
+    },
+    {
+      "tag": "termin",
+      "patterns": ["Ich möchte einen Termin", "Besprechung planen", "Wann habt ihr Zeit?", "Termin vereinbaren"],
+      "responses": "Kategorie: Appointment - Kunde möchte einen Termin vereinbaren."
+    }
+  ]
+}

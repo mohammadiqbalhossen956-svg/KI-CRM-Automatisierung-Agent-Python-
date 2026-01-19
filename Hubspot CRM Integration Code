@@ -1,0 +1,39 @@
+import requests
+
+# HubSpot থেকে পাওয়া আপনার Access Token এখানে দিন
+ACCESS_TOKEN = "আপনার_টোকেন_এখানে" 
+
+headers = {
+    'Authorization': f'Bearer {ACCESS_TOKEN}',
+    'Content-Type': 'application/json'
+}
+
+def analyze_and_update_crm(contact_id, message_text, ai_prediction):
+    # এআই যা সিদ্ধান্ত নিল তা কাস্টমারের নোটে লিখে দেওয়া
+    url = f"https://api.hubapi.com/crm/v3/objects/contacts/{contact_id}/notes"
+    note_data = {
+        "properties": {
+            "hs_note_body": f"AI Assistant Insight: {ai_prediction}\nOriginal Message: {message_text}"
+        }
+    }
+    # এখানে আমরা সরাসরি API কল করছি
+    response = requests.post("https://api.hubapi.com/crm/v3/objects/notes", 
+                             headers=headers, json=note_data)
+    return response.status_code
+
+# কাস্টমার ডাটা ফেচ করা
+def fetch_contacts():
+    url = "https://api.hubapi.com/crm/v3/objects/contacts?properties=firstname,lastname,message_body"
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        return response.json().get('results', [])
+    return []
+
+# মেইন লজিক
+contacts = fetch_contacts()
+for contact in contacts:
+    msg = contact['properties'].get('message_body', 'No message')
+    # এখানে আপনার আগের MLP মডেলটি 'msg' প্রেডিক্ট করবে
+    # ধরুন এআই বের করল এটি 'Rechnung' (Billing)
+    status = analyze_and_update_crm(contact['id'], msg, "Kategorie: Rechnung (Billing)")
+    print(f"Updated {contact['properties'].get('firstname')}: {status}")
